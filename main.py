@@ -5,11 +5,10 @@ from overworld import Overworld
 
 class Game:
     def __init__(self):
-        #with open('save_game', 'r') as f:
-            #max_level = f.readlines()
-        #print(max_level)
-        #self.max_level = int(re.sub("[^0-9]", "", max_level[0]))
-        self.max_level = 0
+        with open('save_game', 'r') as f:
+            max_level = f.readlines()
+        self.max_level = int(re.sub("[^0-9]", "", max_level[0]))
+        #self.max_level = 0
         self.overworld = Overworld(0, self.max_level, screen, self.create_level)
         self.status = 'overworld'
 
@@ -22,6 +21,8 @@ class Game:
             self.max_level = new_max_level
         self.overworld = Overworld(current_level, self.max_level, screen, self.create_level)
         self.status = 'overworld'
+
+
 
     def run(self):
         if self.status == 'overworld':

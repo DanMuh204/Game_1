@@ -1,6 +1,8 @@
 import pygame
 from tiles import Tile
 from tp_tiles import Tp
+from baffs import Baff
+from enemy import  Enemy, InvisibleBlocks
 from settings import tile_size, screen_width, screen_height
 from player import Player
 from game_data import levels
@@ -35,6 +37,9 @@ class Level:
         self.tiles = pygame.sprite.Group()
         self.player = pygame.sprite.GroupSingle()
         self.teleport = pygame.sprite.Group()
+        self.baff_speed = pygame.sprite.Group()
+        self.enemy = pygame.sprite.Group()
+        self.invsblocks = pygame.sprite.Group()
 
         for row_index, row in enumerate(layout):
             for col_index, cell in enumerate(row):
@@ -44,12 +49,21 @@ class Level:
                 if cell == 'X':
                     tile = Tile((x, y), tile_size)
                     self.tiles.add(tile)
-                if cell == 'P':
+                elif cell == 'P':
                     player_sprite = Player((x, y))
                     self.player.add(player_sprite)
-                if cell == 'T':
+                elif cell == 'T':
                     tile_tp = Tp((x,y), tile_size)
                     self.teleport.add(tile_tp)
+                elif cell == 'B':
+                    tile_baff = Baff((x,y), tile_size / 2)
+                    self.baff_speed.add(tile_baff)
+                elif cell == 'E':
+                    enemy_rect = Enemy((x,y), tile_size)
+                    self.enemy.add(enemy_rect)
+                elif cell == 'I':
+                    invs = InvisibleBlocks((x,y), tile_size)
+                    self.invsblocks.add(invs)
 
 
     def scroll_x(self):
@@ -87,6 +101,11 @@ class Level:
         if player.on_right and (player.rect.right > self.current_x or player.direction.x <= 0):
             player.on_right = False
 
+    def enemy_collision_reverse(self):
+        for enemy in self.enemy.sprites():
+            if pygame.sprite.spritecollide(enemy, self.invsblocks, False):
+                enemy.reversed()
+
     def vertical_movement_collision(self):
         player = self.player.sprite
         player.apply_gravity()
@@ -109,15 +128,26 @@ class Level:
 
     def check_death(self):
         if self.player.sprite.rect.top > screen_height:
+            #self.fps_modificator_logic = False
             self.create_overworld(self.current_level, 0)
 
     def check_win(self):
         if pygame.sprite.spritecollide(self.player.sprite, self.teleport, False):
+            #self.fps_modificator_logic = False
             self.create_overworld(self.current_level, self.new_max_level)
-            #with open('save_game', 'w') as f:
-                #f.write(str(self.new_max_level))
+            with open('save_game', 'w') as f:
+                f.write(str(self.new_max_level))
 
     """"
+    def check_speed_baff(self):
+        if pygame.sprite.spritecollide(self.player.sprite, self.baff_speed, False):
+            self.fps_modificator_logic = True
+        if self.fps_modificator_logic == True:
+            return
+        else:
+            return 
+
+    
     def check_win(self):
         if pygame.sprite.spritecollide(self.player.sprite, self.goal, False):
             self.create_overworld(self.current_level, self.new_max_level)
@@ -129,7 +159,15 @@ class Level:
         self.tiles.draw(self.display_surface)
         self.teleport.update(self.world_shift)
         self.teleport.draw(self.display_surface)
+        self.baff_speed.update(self.world_shift)
+        self.baff_speed.draw(self.display_surface)
         self.scroll_x()
+
+        # enemy
+        self.enemy.update(self.world_shift)
+        self.enemy.draw(self.display_surface)
+        self.invsblocks.update(self.world_shift)
+        self.enemy_collision_reverse()
 
         # player
         self.player.update()
