@@ -5,15 +5,19 @@ from overworld import Overworld
 
 class Game:
     def __init__(self):
-        with open('save_game', 'r') as f:
-            max_level = f.readlines()
+        with open('save_level', 'r') as f1:
+            max_level = f1.read()
+        with open('save_health', 'r') as f2:
+            max_health = f2.read()
         self.max_level = int(re.sub("[^0-9]", "", max_level[0]))
-        #self.max_level = 0
+        self.max_health = int(re.sub("[^0-9]", "", max_health[0]))
+        self.cur_health = self.max_health
         self.overworld = Overworld(0, self.max_level, screen, self.create_level)
         self.status = 'overworld'
 
+
     def create_level(self, current_level):
-        self.level = Level(current_level, screen, self.create_overworld)
+        self.level = Level(current_level, screen, self.create_overworld, self.change_max_health)
         self.status = 'level'
 
     def create_overworld(self, current_level, new_max_level):
@@ -22,13 +26,16 @@ class Game:
         self.overworld = Overworld(current_level, self.max_level, screen, self.create_level)
         self.status = 'overworld'
 
-
+    def change_max_health(self, amount):
+        self.max_health += amount
+        return self.max_health
 
     def run(self):
         if self.status == 'overworld':
             self.overworld.run()
         else:
             self.level.run()
+            self.level.level_interface(self.max_health)  # need to change
 
 
 # Pygame setup

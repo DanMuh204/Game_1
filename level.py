@@ -1,4 +1,4 @@
-import pygame
+import pygame, re
 from tiles import Tile
 from tp_tiles import Tp
 from baffs import Baff
@@ -8,13 +8,14 @@ from player import Player
 from game_data import levels
 
 class Level:
-    def __init__(self, current_level, surface, create_overworld):
+    def __init__(self, current_level, surface, create_overworld, change_max_health):
 
         # level setup
         self.display_surface = surface
         self.current_level = current_level
         self.level_data = levels[self.current_level]['content']
         self.setup_level(self.level_data)
+        self.font = pygame.font.Font(None, 30)
         self.world_shift = 0
         self.current_x = 0
 
@@ -27,6 +28,8 @@ class Level:
         # Player setup
         self.goal = pygame.sprite.GroupSingle()
 
+        self.change_max_health = change_max_health
+
     def get_player_on_ground(self):
         if self.player.sprite.on_ground:
             self.player_on_ground = True
@@ -37,7 +40,7 @@ class Level:
         self.tiles = pygame.sprite.Group()
         self.player = pygame.sprite.GroupSingle()
         self.teleport = pygame.sprite.Group()
-        self.baff_speed = pygame.sprite.Group()
+        self.baff_new_heart = pygame.sprite.Group()
         self.enemy = pygame.sprite.Group()
         self.invsblocks = pygame.sprite.Group()
 
@@ -57,7 +60,7 @@ class Level:
                     self.teleport.add(tile_tp)
                 elif cell == 'B':
                     tile_baff = Baff((x,y), tile_size / 2)
-                    self.baff_speed.add(tile_baff)
+                    self.baff_new_heart.add(tile_baff)
                 elif cell == 'E':
                     enemy_rect = Enemy((x,y), tile_size)
                     self.enemy.add(enemy_rect)
@@ -65,6 +68,10 @@ class Level:
                     invs = InvisibleBlocks((x,y), tile_size)
                     self.invsblocks.add(invs)
 
+    def level_interface(self, amount):
+        curr_hearts_surf = self.font.render(f'{str(amount)} Hearts now', False, 'white')
+        curr_hearts_rect = curr_hearts_surf.get_rect(midleft = (135, 115))
+        self.display_surface.blit(curr_hearts_surf, curr_hearts_rect)
 
     def scroll_x(self):
         player = self.player.sprite
@@ -129,14 +136,28 @@ class Level:
     def check_death(self):
         if self.player.sprite.rect.top > screen_height:
             #self.fps_modificator_logic = False
+            new_max_health = self.change_max_health(-1)
+            if new_max_health < 1:
+                new_max_health = self.change_max_health(1)
+            with open('save_health', 'w') as f_health:
+                f_health.write(str(new_max_health))
             self.create_overworld(self.current_level, 0)
 
     def check_win(self):
         if pygame.sprite.spritecollide(self.player.sprite, self.teleport, False):
             #self.fps_modificator_logic = False
             self.create_overworld(self.current_level, self.new_max_level)
-            with open('save_game', 'w') as f:
-                f.write(str(self.new_max_level))
+            with open('save_level', 'r') as f_old:
+                current_level_in_file = f_old.read()
+                current_level_in_file = int(re.sub("[^0-9]", "", current_level_in_file[0]))
+            with open('save_level', 'w') as f_new:
+                f_new.write(str(max(self.new_max_level, current_level_in_file)))
+
+    def check_baff_collisions(self):
+        if pygame.sprite.spritecollide(self.player.sprite, self.baff_new_heart, True):
+            new_max_health = self.change_max_health(1)
+            with open('save_health', 'w') as f_health:
+                f_health.write(str(new_max_health))
 
     """"
     def check_speed_baff(self):
@@ -159,8 +180,8 @@ class Level:
         self.tiles.draw(self.display_surface)
         self.teleport.update(self.world_shift)
         self.teleport.draw(self.display_surface)
-        self.baff_speed.update(self.world_shift)
-        self.baff_speed.draw(self.display_surface)
+        self.baff_new_heart.update(self.world_shift)
+        self.baff_new_heart.draw(self.display_surface)
         self.scroll_x()
 
         # enemy
@@ -177,4 +198,5 @@ class Level:
         self.player.draw(self.display_surface)
         self.check_death()
         self.check_win()
+        self.check_baff_collisions()
         #self.check_win()
