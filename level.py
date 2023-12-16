@@ -29,6 +29,11 @@ class Level:
         self.goal = pygame.sprite.GroupSingle()
 
         self.change_max_health = change_max_health
+        """"
+        self.invincible = False
+        self.hurt_time = 0
+        self.invincibility_duration = 400
+        """
 
     def get_player_on_ground(self):
         if self.player.sprite.on_ground:
@@ -67,6 +72,7 @@ class Level:
                 elif cell == 'I':
                     invs = InvisibleBlocks((x,y), tile_size)
                     self.invsblocks.add(invs)
+
 
     def level_interface(self, amount):
         curr_hearts_surf = self.font.render(f'{str(amount)} Hearts now', False, 'white')
@@ -136,9 +142,9 @@ class Level:
     def check_death(self):
         if self.player.sprite.rect.top > screen_height:
             #self.fps_modificator_logic = False
-            new_max_health = self.change_max_health(-1)
+            new_max_health = self.change_max_health(-10)
             if new_max_health < 1:
-                new_max_health = self.change_max_health(1)
+                new_max_health = self.change_max_health(10)
             with open('save_health', 'w') as f_health:
                 f_health.write(str(new_max_health))
             self.create_overworld(self.current_level, 0)
@@ -155,11 +161,42 @@ class Level:
 
     def check_baff_collisions(self):
         if pygame.sprite.spritecollide(self.player.sprite, self.baff_new_heart, True):
-            new_max_health = self.change_max_health(1)
+            new_max_health = self.change_max_health(15)
             with open('save_health', 'w') as f_health:
                 f_health.write(str(new_max_health))
 
+    def check_enemy_collisions(self):
+        enemy_collisions = pygame.sprite.spritecollide(self.player.sprite, self.enemy, False)
+        if enemy_collisions:
+            for enemy in enemy_collisions:
+                enemy_center = enemy.rect.centery
+                enemy_top = enemy.rect.top
+                player_bottom = self.player.sprite.rect.bottom
+                if enemy_top < player_bottom < enemy_center and self.player.sprite.direction.y >= 0:
+                    enemy.kill()
+                else:
+                    new_max_health = self.change_max_health(-1)
+                    if new_max_health < 1:
+                        new_max_health = self.change_max_health(10)
+                        self.create_overworld(self.current_level, 0)
+                        f_health = open('save_health', 'w')
+                        f_health.write(str(new_max_health))
+                        f_health.close()
     """"
+    def get_invincible(self):
+        if not self.invincible:
+            self.invincible = True
+            self.hurt_time = pygame.time.get_ticks()
+
+    def invincibility_timer(self):
+        if self.invincible:
+            current_time = pygame.time.get_ticks()
+            if current_time - self.hurt_time >= self.invincibility_duration:
+                self.invincible = False
+
+                    #self.player.sprite.get_damage()
+
+    
     def check_speed_baff(self):
         if pygame.sprite.spritecollide(self.player.sprite, self.baff_speed, False):
             self.fps_modificator_logic = True
@@ -189,6 +226,7 @@ class Level:
         self.enemy.draw(self.display_surface)
         self.invsblocks.update(self.world_shift)
         self.enemy_collision_reverse()
+        self.check_enemy_collisions()
 
         # player
         self.player.update()

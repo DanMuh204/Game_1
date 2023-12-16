@@ -10,8 +10,8 @@ class Game:
         with open('save_health', 'r') as f2:
             max_health = f2.read()
         self.max_level = int(re.sub("[^0-9]", "", max_level[0]))
-        self.max_health = int(re.sub("[^0-9]", "", max_health[0]))
-        self.cur_health = self.max_health
+        self.max_health = int(re.sub("[^0-9]", "", max_health))
+        # self.cur_health = self.max_health
         self.overworld = Overworld(0, self.max_level, screen, self.create_level)
         self.status = 'overworld'
 
@@ -29,6 +29,9 @@ class Game:
     def change_max_health(self, amount):
         self.max_health += amount
         return self.max_health
+
+    def change_health(self, amount):
+        self.cur_health += amount
 
     def run(self):
         if self.status == 'overworld':

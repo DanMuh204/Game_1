@@ -57,3 +57,10 @@ class Player(pygame.sprite.Sprite):
     def update(self):
         self.get_input()
         self.get_status()
+
+class Player_damage:
+    def __init__(self, change_health):
+        self.change_health = change_health
+
+    def get_damage(self):
+        self.change_health(-1)

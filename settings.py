@@ -35,29 +35,30 @@ level_2_map = [
 
 level_3_map = [
 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
-'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
-'XXXXXXXXXXXXXXXX   B               T',
-'XXXXXXXXXXXXXX    XXXXXXXXXXXXXXXXXX',
-'XXXXXXXXXXXXX  XXX  XXXXXXXXXXXXXXXX',
-'XXXXXXXXXXXX  XXXXX   XXXXXXXXXXXXXX',
-'XXXXXXXXXXX  XXXXXXX  XXXXXXXXXXXXXX',
-'XXXXXXXXXXXX   XXXX  XXXXXXXXXXXXXXX',
-'XXXXXXXXXXXXXX   X  XXXXXXXXXXXXXXXX',
-'XXXXXXXXXXXXXXXX P XXXXXXXXXXXXXXXXX',
+'XXXXXXXXXX                      XXXX',
+'XXXXXXX            B               T',
+'XXXXX        XI  E  IXXXXXXXXXXXXXXX',
+'XXXX       XX  XXXXXXXXXXXXXXXXXXXXX',
+'XXXX      XX  XXXXXXXXXXXXXXXXXXXXXX',
+'XXXX     XX  XXXXXXXXXXXXXXXXXXXXXXX',
+'XXXX           XXXXXXXXXXXXXXXXXXXXX',
+'XXXXXXXX                      XXXXXX',
+'XXXXXXXIE      P  I           XXXXXX',
 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
 '                                    '
 ]
 
 level_4_map = [
-'                                       ',
-'                                       ',
-'                                       ',
-'                                       ',
-'                                       ',
+'                                        ',
+'                                        ',
+'                                        ',
+'                                        ',
+'                                        ',
 'X                                      X',
-'XP  BI      E   I   E   I   E     I    X',
+'XP  BI     EE   E  EE   E   E     E  ITX',
 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 ]
+
 tile_size = 64
 screen_width = 1200
 screen_height = tile_size * len(level_2_map)

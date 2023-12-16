@@ -84,10 +84,13 @@ class Overworld:
     def get_movement_data(self, target):
         start = pygame.math.Vector2(self.nodes.sprites()[self.current_level].rect.center)
 
-        if target == 'next':
+        if target == 'next': # and (self.current_level + 1 < len(self.nodes.sprites())):
             end = pygame.math.Vector2(self.nodes.sprites()[self.current_level + 1].rect.center)
+        #elif target == 'previous' and self.current_level > 0:
         else:
             end = pygame.math.Vector2(self.nodes.sprites()[self.current_level - 1].rect.center)
+        #else:
+            #return (self.nodes.sprites()[0].rect.centerx, self.nodes.sprites()[0].rect.centery)
 
         return (end - start).normalize()
 
