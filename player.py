@@ -1,39 +1,46 @@
+"""
+В этом модуле определяется класс Player
+"""
 import pygame
 
 
 class Player(pygame.sprite.Sprite):
+    """Этот класс описывает объект игрок
+
+        Объект игрок отвечает за отрисовку на экране и движения игрока
+    """
     def __init__(self, pos):
-        super().__init__()
+        """
+        Инициализация объекта tp
+
+        :param pos: позиция, на которой будет находиться topleft отображения игрока
+        :type pos: tuple
+        """
+        super().__init__()  # инициализация класса Sprite
         self.image = pygame.Surface((32, 64))
+        """поверхность размера 32 на 64"""
         self.image.fill('blue')
         self.rect = self.image.get_rect(topleft=pos)
+        """прямоугольник, для которого topleft=pos"""
 
-        # player movement
+        # Движение игрока
         self.direction = pygame.math.Vector2(0, 0)
+        """Создаём переменную движения (вектора) игрока"""
         self.speed = 8
+        """Создаём переменную скорости игрока"""
         self.gravity = 0.8
+        """Создаём переменную модификатора гравитации"""
         self.jump_speed = -16
+        """Создаём переменную скорости прыжка"""
 
-        # player status
-        #self.status = 'idle'
-        #self.facing_right = True
+        # Статусы игрока
         self.on_ground = False
-        self.on_ceiling = False
-        #self.on_left = False
-        #self.on_right = False
-
-    #def get_status(self):  # получение статуса персонажа
-        #if self.direction.y < 0:  # игрок движется вверх
-            #self.status = 'jump'
-        #elif self.direction.y > 1:
-            #self.status = 'fall'
-        #else:
-            #if self.direction.x != 0:
-                #self.status = 'run'
-            #else:
-                #self.status = 'idle'
+        """Создаём переменную, отвечающую за проверку нахождения игрока на 'полу'"""
 
     def get_input(self):
+        """
+        Функция распознавания нажатия определённых клавиш и изменения движения игрока в соответствии с ними
+        """
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_d]:
@@ -46,19 +53,20 @@ class Player(pygame.sprite.Sprite):
             self.jump()
 
     def apply_gravity(self):
+        """
+        Функция применения гравитации к игроку
+        """
         self.direction.y += self.gravity
         self.rect.y += self.direction.y
 
     def jump(self):
+        """
+        Функция прыжка игрока (изменения направления по вертикали)
+        """
         self.direction.y = self.jump_speed
 
     def update(self):
+        """
+        Функция обновления проверки нажатия
+        """
         self.get_input()
-        #self.get_status()
-
-#class Player_damage:
-    #def __init__(self, change_health):
-        #self.change_health = change_health
-
-    #def get_damage(self):
-        #self.change_health(-1)

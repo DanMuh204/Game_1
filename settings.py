@@ -1,66 +1,8 @@
-
-# X - block ; T - new level teleport
-level_1_map = [
-'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX ',
-'                                     ',
-'X        B                         X ',
-'XXX     XXX                    XXXXX ',
-'XXXX           I  E I          XXXXX ',
-'XXXXX           XXXX   X  I  E     TI',
-'XXXXX  X                   XXXXXXXXX ',
-'XXX           XXX     XXX         XX ',
-'XX         X  X XXXXX             XX ',
-'XX       XXX  XXXXXXXX      XXX   XX ',
-'XXP     XXX   XXXXXXXXXXXX  XXX   XX ',
-'XXXXXXXXXXX   XXXXXXXXXXX  XXX   XXX ',
-'                                     ']
-
-level_2_map = [
-'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
-'                                     ',
-'                                     ',
-'X      B                             ',
-'X     XXX   X  X   X               XX',
-'XXX                X            XXXXX',
-'XXXX               X            XXXXX',
-'XXXXXIE   I  X     XI  E I         T',
-'XXXXXXXXXX      XXXXXXXXX     XXXXXXX',
-'XXX           XXX          XX    XXXX',
-'XX         X   XXXXXIE  I  XX      XX',
-'XX      XXXX  XXXXXXXXXX    XXX   XXX',
-'XXP    XXXX              X  XXX   XXX',
-'XXXXXXXXXXX   XXXXXXXXXXX  XXX   XXXX',
-'                                     '
-]
-
-level_3_map = [
-'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
-'XXXXXXXXXX                      XXXX',
-'XXXXXXX            B               T',
-'XXXXX        XI  E  IXXXXXXXXXXXXXXX',
-'XXXX       XX  XXXXXXXXXXXXXXXXXXXXX',
-'XXXX      XX  XXXXXXXXXXXXXXXXXXXXXX',
-'XXXX     XX  XXXXXXXXXXXXXXXXXXXXXXX',
-'XXXX           XXXXXXXXXXXXXXXXXXXXX',
-'XXXXXXXX                      XXXXXX',
-'XXXXXXXIE      P  I           XXXXXX',
-'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
-'                                    '
-]
-
-level_4_map = [
-'                                        ',
-'                                        ',
-'                                        ',
-'                                        ',
-'                                        ',
-'X                                      X',
-'XP  BI     EE   E  EE   E   E     E  ITX',
-'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
-]
+"""Этот модуль отвечает за настройки экрана и размер плиток для объектов"""
 
 tile_size = 64
+"""Эта переменная отвечает за размеры плитки для объектов"""
 screen_width = 1200
+"""Эта переменная отвечает за ширину экрана"""
 screen_height = tile_size * 15
-
-
+"""Эта переменная отвечает за высоту экрана"""
