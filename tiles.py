@@ -1,23 +1,34 @@
-import pygame
+"""
+В этом модуле определяется класс Tile
+"""
+import pygame  # импортируем библиотеку
 
 
-class Tile(pygame.sprite.Sprite):
-    def __init__(self, pos, size):
-        super().__init__()
-        self.image = pygame.Surface((size, size))
-        self.image.fill('brown')
-        self.rect = self.image.get_rect(topleft=pos)
+class Tile(pygame.sprite.Sprite):  # создаём класс для поверхности
+    """Этот класс описывает объект плитка
 
-    def update(self, x_shift):  # camera shift x
-        self.rect.x += x_shift
+        По плиткам передвигается игрок и они составляют уровень
+    """
+    def __init__(self, pos, size):  # инициализируем объекты позиция и размер
+        """
+        инициализация объекта tile
 
+        :param pos: позиция, на которой будет находиться topleft отображения плитки
+        :type pos: int
+        :param size: размер нарисованной плитки (этот параметр будет умножен на 64)
+        :type size: int
+        """
+        super().__init__()  # инициализация класса Sprite
+        self.image = pygame.Surface((size, size))  # создаём поверхность определённого размера
+        """поверхность размера (size, size)"""
+        self.image.fill('brown')  # придаём этой поверхности цвет
+        self.rect = self.image.get_rect(topleft=pos)  # делаем на этой поверхности прямоугольник
+        """прямоугольник, для которого topleft=pos"""
 
-class FinalBlock(pygame.sprite.Sprite):
-    def __init__(self, pos, size):
-        super().__init__()
-        self.image = pygame.Surface((size, size))
-        self.image.fill('gold')
-        self.rect = self.image.get_rect(topleft=pos)
+    def update(self, x_shift):  # функция движение камеры по горизонтали
+        """
+        функция движения камеры по горизонтали
 
-    def update(self, x_shift):  # camera shift x
-        self.rect.x += x_shift
+        :param x_shift: величина смещения камеры (карты) по горизонтали
+        """
+        self.rect.x += x_shift  # двигаем наши tile по горизонтали в соответсвие со значением смещения камеры

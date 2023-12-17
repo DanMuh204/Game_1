@@ -4,14 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="31528efe-4e25-462d-a808-027e97d023cf" name="Changes" comment="Pre-final commit">
+    <list default="true" id="31528efe-4e25-462d-a808-027e97d023cf" name="Changes" comment="Changed overworld's movement commit">
+      <change afterPath="$PROJECT_DIR$/Tests/test_baff.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/test_level.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/test_overworld.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/test_tiles.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pytest.ini" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/baffs.py" beforeDir="false" afterPath="$PROJECT_DIR$/baffs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/enemy.py" beforeDir="false" afterPath="$PROJECT_DIR$/enemy.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/game_data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/level.py" beforeDir="false" afterPath="$PROJECT_DIR$/level.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/overworld.py" beforeDir="false" afterPath="$PROJECT_DIR$/overworld.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/player.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/save_game" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/save_health" beforeDir="false" afterPath="$PROJECT_DIR$/save_health" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tiles.py" beforeDir="false" afterPath="$PROJECT_DIR$/tiles.py" afterDir="false" />
@@ -24,6 +31,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Python Unit Test" />
         <option value="Python Script" />
       </list>
     </option>
@@ -31,9 +39,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2ZUuX0ubvCJ1y5FNzOQHxHHNZbF" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -42,6 +50,9 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python tests.Python tests in test_level.py.executor": "Run",
+    "Python tests.Python tests in test_overworld.py.executor": "Run",
+    "Python tests.Python tests in test_tiles.py.executor": "Run",
     "Python.level.executor": "Run",
     "Python.levels_list.executor": "Run",
     "Python.main.executor": "Run",
@@ -124,12 +135,24 @@
       <option name="project" value="LOCAL" />
       <updated>1702695339999</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Changed overworld's movement commit">
+      <option name="closed" value="true" />
+      <created>1702711993136</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1702711993136</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.ini" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First commit" />
     <MESSAGE value="Pre-final commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pre-final commit" />
+    <MESSAGE value="Changed overworld's movement commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed overworld's movement commit" />
   </component>
 </project>

@@ -61,6 +61,6 @@ level_4_map = [
 
 tile_size = 64
 screen_width = 1200
-screen_height = tile_size * len(level_2_map)
+screen_height = tile_size * 15
 
 

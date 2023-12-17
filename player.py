@@ -15,25 +15,23 @@ class Player(pygame.sprite.Sprite):
         self.jump_speed = -16
 
         # player status
-        self.status = 'idle'
-        self.facing_right = True
+        #self.status = 'idle'
+        #self.facing_right = True
         self.on_ground = False
         self.on_ceiling = False
-        self.on_left = False
-        self.on_right = False
+        #self.on_left = False
+        #self.on_right = False
 
-    # место для функций анимации персонажа
-
-    def get_status(self):  # получение статуса персонажа
-        if self.direction.y < 0:  # игрок движется вверх
-            self.status = 'jump'
-        elif self.direction.y > 1:
-            self.status = 'fall'
-        else:
-            if self.direction.x != 0:
-                self.status = 'run'
-            else:
-                self.status = 'idle'
+    #def get_status(self):  # получение статуса персонажа
+        #if self.direction.y < 0:  # игрок движется вверх
+            #self.status = 'jump'
+        #elif self.direction.y > 1:
+            #self.status = 'fall'
+        #else:
+            #if self.direction.x != 0:
+                #self.status = 'run'
+            #else:
+                #self.status = 'idle'
 
     def get_input(self):
         keys = pygame.key.get_pressed()
@@ -56,11 +54,11 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         self.get_input()
-        self.get_status()
+        #self.get_status()
 
-class Player_damage:
-    def __init__(self, change_health):
-        self.change_health = change_health
+#class Player_damage:
+    #def __init__(self, change_health):
+        #self.change_health = change_health
 
-    def get_damage(self):
-        self.change_health(-1)
+    #def get_damage(self):
+        #self.change_health(-1)

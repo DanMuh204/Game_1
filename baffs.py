@@ -1,12 +1,32 @@
-import pygame
+"""
+В этом модуле определяется класс Baff
+"""
+import pygame  # импортируем библиотеку
 
 
-class Baff(pygame.sprite.Sprite):
-    def __init__(self, pos, size):
-        super().__init__()
-        self.image = pygame.Surface((size, size))
-        self.image.fill('pink')
-        self.rect = self.image.get_rect(topleft=pos)
+class Baff(pygame.sprite.Sprite):  # создаём класс для баффа здоровья
+    """Этот класс описывает объект бафф"""
+    def __init__(self, pos, size):  # инициализируем объекты позиция и размер
+        """
+        инициализация объекта Baff
 
-    def update(self, x_shift):  # camera shift x
-        self.rect.x += x_shift
+
+        :param pos: позиция, на которой будет находиться topleft отображения баффа
+        :type pos: list
+        :param size: размер нарисованного баффа (этот параметр будет умножен на 32)
+        :type size: int
+        """
+        super().__init__()  # инициализация класса Sprite
+        self.image = pygame.Surface((size, size))  # создаём поверхность определённого размера
+        """поверхность размера (size, size)"""
+        self.image.fill('pink')  # придаём этой поверхности цвет
+        self.rect = self.image.get_rect(topleft=pos)  # делаем на этой поверхности прямоугольник
+        """прямоугольник, для которого topleft=pos"""
+
+    def update(self, x_shift):
+        """
+        функция движения камеры по горизонтали
+
+        :param x_shift: величина смещения камеры (карты) по горизонтали
+        """
+        self.rect.x += x_shift  # двигаем наши tile по горизонтали в соответсвие со значением смещения камеры

@@ -4,7 +4,7 @@ from game_data import levels
 
 class Node(pygame.sprite.Sprite):
     def __init__(self, pos, status, icon_speed):
-        super().__init__()
+        super().__init__()  # инициализация класса Sprite
         self.image = pygame.Surface((100, 80))
         if status == 'available':
             self.image.fill('red')
@@ -18,7 +18,7 @@ class Node(pygame.sprite.Sprite):
 
 class Icon(pygame.sprite.Sprite):
     def __init__(self, pos):
-        super().__init__()
+        super().__init__()  # инициализация класса Sprite
         self.pos = pos
         self.image = pygame.Surface((20, 20))
         self.image.fill('blue')
@@ -84,14 +84,10 @@ class Overworld:
     def get_movement_data(self, target):
         start = pygame.math.Vector2(self.nodes.sprites()[self.current_level].rect.center)
 
-        if target == 'next': # and (self.current_level + 1 < len(self.nodes.sprites())):
+        if target == 'next':
             end = pygame.math.Vector2(self.nodes.sprites()[self.current_level + 1].rect.center)
-        #elif target == 'previous' and self.current_level > 0:
         else:
             end = pygame.math.Vector2(self.nodes.sprites()[self.current_level - 1].rect.center)
-        #else:
-            #return (self.nodes.sprites()[0].rect.centerx, self.nodes.sprites()[0].rect.centery)
-
         return (end - start).normalize()
 
     def update_icon_pos(self):
