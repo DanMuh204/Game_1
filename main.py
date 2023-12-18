@@ -75,6 +75,7 @@ class Game:  # объявляем класс игры, через который
 pygame.init()  # инициация pygame
 screen = pygame.display.set_mode((screen_width, screen_height))  # создаём окно с параметрами ширины и высоты
 """Окно с параметрами ширины и высоты"""
+pygame.display.set_caption('Platform Game')
 clock = pygame.time.Clock()  # устанавливаем таймер для частоты обновления экрана
 """Создание таймера для частоты обновления экрана"""
 game = Game()  # создали объекта game, при запуске которого (метод run) будет запускаться остальная логика игры
